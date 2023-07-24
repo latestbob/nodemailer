@@ -21,25 +21,32 @@ const users = [
 
 app.post('/api/send', (req, res) => {
 
-    const { email, subject, message } = req.body;
+    const { email, subject, message, bccList } = req.body;
 
     var transport = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
+        host: "mail.racius.tech",
+        port: 465,
         auth: {
-          user: "cb7c35080c96cb",
-          pass: "351dc4a90408c7"
+          user: "testsmtp@racius.tech",
+          pass: "BOBson246**"
         }
       });
 
 
       // Define the email optionsn
-    const mailOptions = {
-        from: 'testsmtp@brotherr.co.uk',
-        to: email, // Replace with the recipient's email address
-        subject: subject,
-        html: message,
-      };
+
+      
+        const mailOptions = {
+          from: 'testsmtp@racius.tech',
+          to: email, // Replace with the recipient's email address
+          bcc: bccList.join(','),
+          subject: subject,
+          html: message,
+        };
+
+      
+
+    
 
       //send mail
 
@@ -49,7 +56,8 @@ app.post('/api/send', (req, res) => {
           res.status(500).json({ error: 'Error sending email' });
         } else {
           console.log('Email sent successfully:', info.messageId);
-          res.status(200).json({ message: 'Email sent successfully' });
+          console.log(bccList)
+          res.status(200).json({ message: 'Email sent successfully', });
         }
       });
 
