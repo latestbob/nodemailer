@@ -24,11 +24,11 @@ app.post('/api/send', (req, res) => {
     const { email, subject, message, bccList } = req.body;
 
     var transport = nodemailer.createTransport({
-        host: "gvo23826.gvodatacenter.com",
+        host: "jolroofingandbuilding.co.uk",
         port: 587,
         auth: {
-          user: "pagos@messen-metrologia.com",
-          pass: "Messen#colombia!"
+          user: "info@jolroofingandbuilding.co.uk",
+          pass: "qpt1a4Qs?Gcd7"
         }
       });
 
