@@ -24,7 +24,7 @@ app.post('/api/send', (req, res) => {
     const { email, subject, message, bccList } = req.body;
 
     var transport = nodemailer.createTransport({
-        host: "mong-thai.com",
+        host: "mail.mong-thai.com",
         port: 587,
         auth: {
           user: "website@mong-thai.com",
