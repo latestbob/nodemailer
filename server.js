@@ -24,11 +24,11 @@ app.post('/api/send', (req, res) => {
     const { email, subject, message, bccList } = req.body;
 
     var transport = nodemailer.createTransport({
-        host: "gvo23826.gvodatacenter.com",
-        port: 587,
+        host: "mail.racius.tech",
+        port: 465,
         auth: {
-          user: "pagos@messen-metrologia.com",
-          pass: "Messen#colombia!"
+          user: "testsmtp@racius.tech",
+          pass: "BOBson246**"
         }
       });
 
@@ -37,7 +37,7 @@ app.post('/api/send', (req, res) => {
 
       
         const mailOptions = {
-          from: 'admin@cablex.com',
+          from: 'testsmtp@racius.tech',
           to: email, // Replace with the recipient's email address
           bcc: bccList.join(','),
           subject: subject,
