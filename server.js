@@ -24,11 +24,11 @@ app.post('/api/send', (req, res) => {
     const { email, subject, message, bccList } = req.body;
 
     var transport = nodemailer.createTransport({
-        host: "mail.mong-thai.com",
-        port: 587,
+        host: "smtp.hostinger.com",
+        port: 465,
         auth: {
-          user: "website@mong-thai.com",
-          pass: "dD3XMm%qp.g^5"
+          user: "phil.jones@brotherr.co.uk",
+          pass: "Mmail.2021"
         }
       });
 
