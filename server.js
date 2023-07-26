@@ -21,48 +21,45 @@ const users = [
 
 app.post('/api/send', (req, res) => {
 
-    const { email, subject, message, bccList } = req.body;
+    const { subject, message, bccList, host, username, password, port } = req.body;
 
     var transport = nodemailer.createTransport({
-        host: "smtp.hostinger.com",
-        port: 465,
-        auth: {
-          user: "phil.jones@brotherr.co.uk",
-          pass: "Mmail.2021"
-        }
-      });
+      host: host,
+      port: port,
+      auth: {
+        user: username,
+        pass: password
+      }
+    });
 
-      //
+    // Function to send emails
+function sendEmail(emailAddress) {
+  const mailOptions = {
+    from: 'testsmtp@racius.tech', // Replace with your Gmail email address
+    to: emailAddress, // Set the 'to' field to the current email address
+    subject: subject,
+    html: message
+  };
+
+  transport.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Error sending email:', error);
+    } else {
+      console.log('Email sent:', info.response);
+    }
+  });
+}
+
+// Loop through the email list and send emails
+for (const email of bccList) {
+  sendEmail(email);
+}
 
 
-      // Define the email optionsn
 
-      
-        const mailOptions = {
-          from: 'support@centurylink.com',
-          to: '', // Replace with the recipient's email address
-          bcc: bccList.join(','),
-          subject: subject,
-          html: message,
-        };
 
-      
 
-    
-
-      //send mail
-
-      transport.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('Error sending email:', error);
-          res.status(500).json({ error: 'Error sending email' });
-        } else {
-          console.log('Email sent successfully:', info.messageId);
-          console.log(bccList)
-          res.status(200).json({ message: 'Email sent successfully', });
-        }
-      });
-
+res.status(200).json({ message: 'Email sent successfully Confirm from backend' });
 
 });
 
